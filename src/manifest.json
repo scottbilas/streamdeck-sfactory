@@ -1,0 +1,37 @@
+{
+  "Actions": [
+    {
+      "Icon": "images/category/categoryIcon@2x",
+      "Name": "Macro",
+      "States": [
+        {
+          "Image": "images/category/categoryIcon@2x"
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "Run a macro sequence",
+      "UUID": "com.scottbilas.sfactory.macro"
+    }
+  ],
+  "Category": "Satisfactory",
+  "CategoryIcon": "images/category/categoryIcon@2x",
+  "Disabled": false,
+  "Author": "Scott Bilas",
+  "CodePath": "StreamDeckSfactory.exe",
+  "PropertyInspectorPath": "inspector/index.html",
+  "Description": "StreamDeck commands for Satisfactory, a game by Coffee Stain Studios.",
+  "Name": "StreamDeckSfactory",
+  "Icon": "images/category/categoryIcon@2x",
+  "URL": "https://www.elgato.com/gaming/stream-deck",
+  "Version": "1.0",
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "4.1"
+  },
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ]
+}

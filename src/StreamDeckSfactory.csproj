@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+
+        <!-- build -->
+        <TargetFramework>net7.0</TargetFramework>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <RuntimeIdentifiers Condition=" '$(Configuration)'=='Release' ">win-x64;osx-x64</RuntimeIdentifiers>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+        <OutputPath>$(ArtifactsPath)bin\$(Configuration)</OutputPath>
+        <PublishDir>$(ArtifactsPath)publish\$(Configuration)</PublishDir>
+
+        <!-- compiler -->
+        <LangVersion>latest</LangVersion>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <Nullable>enable</Nullable>
+        <RootNamespace/>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+        <PublishSingleFile>true</PublishSingleFile>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <SelfContained>true</SelfContained> <!-- true = 80MB, false = 5MB but risks breaking depending on .NET installation -->
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="InputSimulatorPlus" Version="1.0.7">
+            <NoWarn>NU1701</NoWarn>
+        </PackageReference>
+        <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
+        <PackageReference Include="StreamDeckLib" Version="0.5.2040" />
+        <PackageReference Include="StreamDeckLib.Config" Version="0.5.2040" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="System.Net.WebSockets" Version="4.3.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PluginFiles Include="en.json" />
+        <PluginFiles Include="manifest.json" />
+        <PluginFiles Include="appsettings.json" />
+        <PluginFiles Include="images\**\*" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PluginFiles Include="inspector\**\*" />
+
+        <None Update="inspector\index.tt">
+            <Generator>TextTemplatingFileGenerator</Generator>
+            <LastGenOutput>index.html</LastGenOutput>
+        </None>
+        <Content Update="inspector\index.html">
+            <AutoGen>True</AutoGen>
+            <DesignTime>True</DesignTime>
+            <DependentUpon>index.tt</DependentUpon>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PluginFiles Remove="**\*.tt" />
+        <PluginFiles Remove="**\.*" />
+
+        <None Include="@(PluginFiles)">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <Folder Include="images\hotbars\" />
+    </ItemGroup>
+
+</Project>

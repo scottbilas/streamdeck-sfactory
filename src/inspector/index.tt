@@ -1,0 +1,123 @@
+<#@ output extension=".html" #>
+<#@ template language="C#" hostspecific="true" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<# /* TODO: get rid of this t4 file and have the js do the populating of the control */ #>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Satisfactory Property Inspector</title>
+    <link rel="stylesheet" href="libs/css/sdpi.css">
+</head>
+<body>
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item">
+            <div class="sdpi-item-label">Macro</div>
+            <select class="sdpi-item-value select" id="property-macro">
+                <optgroup label="HotBar">
+<# for (var i = 1; i <= 10; ++i) { #>
+                    <option value="<#=i#>" macroType="hotbar">Hotbar <#=i#></option>
+<# } #>
+                </optgroup>
+<# foreach (var group in GetBuildings().GroupBy(b => b.Group).OrderBy(g => g.Key)) { #>
+                <optgroup label="<#=group.Key#>">
+<#   foreach (var building in group) { #>
+                    <option value="<#=building.Name#>"<#=building.VariantCount > 1 ? " variants=\"true\"" : ""#>><#=building.Name#></option>
+<#   } #>
+                </optgroup>
+<# } #>
+            </select>
+        </div>
+    </div>
+
+    <!-- Stream Deck Libs -->
+    <script src="libs/js/constants.js"></script>
+    <script src="libs/js/action.js"></script>
+    <script src="libs/js/events.js"></script>
+    <script src="libs/js/api.js"></script>
+    <script src="libs/js/utils.js"></script>
+    <script src="libs/js/property-inspector.js"></script>
+
+    <script src="index.js"></script>
+</body>
+</html>
+<#+
+    struct Building
+    {
+        public string Name;
+        public string Group;
+        public int Order;
+        public int VariantCount;
+    }
+
+    // TODO: groups like FICSMAS
+    IEnumerable<Building> GetBuildings()
+    {
+        var buildingsPath = Path.Combine(Path.GetDirectoryName(Host.TemplateFile), "..", "data", "Buildings.txt");
+        var buildings = File.ReadLines(buildingsPath).Select(b => b.Trim()).Where(b => b.Length != 0);
+        var uniques = new Dictionary<string, int>();
+
+        foreach (var building in buildings)
+        {
+            var end = building.IndexOf(" (");
+            var name = end >= 0 ? building.Substring(0, end) : building;
+            if (!uniques.ContainsKey(name))
+                uniques.Add(name, 0);
+            ++uniques[name];
+        }
+
+        string[][] groupings =
+        {
+            new[] { "FICSMAS",
+                "FICSMAS", "Candy", "Snowman" },
+            new[] { "Transport",
+                "Cyber", "Explorer", "Tractor", "Truck", "Train", "Car", "Signal", "Railway", },
+            new[] { "Transfer",
+                "Power", "Outlet", "Hypertube", "Pipeline", "Fluid" },
+            new[] { "Walls",
+                "Wall", "Window", "Gate", },
+            new[] { "Decorations",
+                "Light", "Label", "Billboard", "Sign", "Panel", "Barrier" },
+            new[] { "Walkways",
+                "Catwalk", "Walkway", "Ladder", "Platform", "Stairs", "Railing" },
+            new[] { "Structure",
+                "Foundation", "Ramp", "Corner", "Pillar", "Beam", "Qaurter" },
+            new[] { "Roofs",
+                "Roof" },
+            new[] { "Logistics",
+                "Conveyor", "Belt", "Lift", "Merger", "Splitter" },
+        };
+
+        return uniques.Keys.OrderBy(k => k).Select(name =>
+        {
+            var building = new Building
+            {
+                Name = name,
+                Group = "Other",
+                VariantCount = uniques[name], // TODO: use this
+
+                // image also..?
+                //<!--option value="Basic_Wall_1m_(FICSIT).png">Basic Wall 1m</option-->
+            };
+
+            var words = name.Split(' ');
+            foreach (var grouping in groupings)
+            {
+                for (var i = 1; i < grouping.Length; ++i)
+                {
+                    if (!words.Contains(grouping[i]))
+                        continue;
+
+                    building.Group = grouping[0];
+                    return building;
+                }
+            }
+
+            return building;
+        });
+    }
+#>
