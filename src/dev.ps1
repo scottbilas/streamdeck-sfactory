@@ -119,19 +119,31 @@ if (!$NoTail) {
     Write-Host
 
     $first = $true
-    tail -f $logFile | %{
+    $last = $null
+
+    tail -f $logFile | ForEach-Object {
         $parts = $_.Split(' ', 3)
-        $time = [datetime]($parts[0]+' '+$parts[1])
-        $offset = ($time - $start).TotalSeconds
 
-        if ($offset -ge 0) {
-            if ($first) {
-                $start = Get-Date
-                $offset = 0
-                $first = $false
+        try {
+            $time = [datetime]($parts[0]+' '+$parts[1])
+            $last = $time
+        }
+        catch {
+            $time = $last
+        }
+
+        if ($time) {
+            $offset = ($time - $start).TotalSeconds
+
+            if ($offset -ge 0) {
+                if ($first) {
+                    $start = Get-Date
+                    $offset = 0
+                    $first = $false
+                }
+
+                Write-Host ("{0,7:0.000} {1}" -f $offset, $parts[2])
             }
-
-            Write-Host ("{0,7:0.000} {1}" -f $offset, $parts[2])
         }
     }
 }
