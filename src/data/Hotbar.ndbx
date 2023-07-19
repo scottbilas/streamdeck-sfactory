@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ndbx formatVersion="21" type="file" uuid="f18a8d90-4e35-43e0-af3f-32fdafb52891">
+    <property name="canvasHeight" value="1000"/>
+    <property name="canvasWidth" value="1000"/>
+    <property name="canvasX" value="0"/>
+    <property name="canvasY" value="0"/>
+    <node name="root" prototype="core.network" renderedChild="combine1">
+        <node name="angle" position="11.00,4.00" prototype="math.number">
+            <port name="value" type="float" value="28.0"/>
+        </node>
+        <node name="angle1" position="19.00,0.00" prototype="math.number">
+            <port name="value" type="float" value="28.0"/>
+        </node>
+        <node name="arc1" position="4.00,8.00" prototype="corevector.arc">
+            <port name="width" type="float" value="244.0"/>
+            <port name="height" type="float" value="244.0"/>
+            <port name="degrees" type="float" value="10.0"/>
+        </node>
+        <node name="arc2" position="7.00,8.00" prototype="corevector.arc">
+            <port name="width" type="float" value="128.0"/>
+            <port name="height" type="float" value="128.0"/>
+            <port name="degrees" type="float" value="10.0"/>
+        </node>
+        <node name="arc3" position="17.00,9.00" prototype="corevector.arc">
+            <port name="width" type="float" value="250.0"/>
+            <port name="height" type="float" value="250.0"/>
+            <port name="degrees" type="float" value="10.0"/>
+        </node>
+        <node name="arc4" position="20.00,9.00" prototype="corevector.arc">
+            <port name="width" type="float" value="128.0"/>
+            <port name="height" type="float" value="128.0"/>
+            <port name="degrees" type="float" value="10.0"/>
+        </node>
+        <node name="colorize1" position="4.00,10.00" prototype="corevector.colorize">
+            <port name="fill" type="color" value="#4d4d4dff"/>
+        </node>
+        <node name="colorize2" position="18.00,13.00" prototype="corevector.colorize">
+            <port name="fill" type="color" value="#f7f7f7ff"/>
+        </node>
+        <node name="colorize3" position="7.00,15.00" prototype="corevector.colorize">
+            <port name="fill" type="color" value="#ffffffff"/>
+        </node>
+        <node name="combine1" position="11.00,16.00" prototype="list.combine"/>
+        <node name="compound1" position="4.00,9.00" prototype="corevector.compound">
+            <port name="function" type="string" value="subtracted"/>
+        </node>
+        <node name="compound2" position="18.00,11.00" prototype="corevector.compound">
+            <port name="function" type="string" value="subtracted"/>
+        </node>
+        <node name="divide1" position="7.00,3.00" prototype="math.divide"/>
+        <node name="divide2" position="18.00,3.00" prototype="math.divide"/>
+        <node name="inner_width" position="11.00,3.00" prototype="math.number">
+            <port name="value" type="float" value="202.0"/>
+        </node>
+        <node name="inner_width1" position="25.00,5.00" prototype="math.number">
+            <port name="value" type="float" value="196.0"/>
+        </node>
+        <node name="line1" position="7.00,13.00" prototype="corevector.line">
+            <port name="point1" type="point" value="-25.00,57.00"/>
+            <port name="point2" type="point" value="148.00,57.00"/>
+        </node>
+        <node name="multiply1" position="4.00,1.00" prototype="math.multiply"/>
+        <node name="number1" position="5.00,0.00" prototype="math.number">
+            <port name="value" type="float" value="36.0"/>
+        </node>
+        <node name="number2" position="14.00,-1.00" prototype="math.number">
+            <port name="value" type="float" value="2.0"/>
+        </node>
+        <node name="number3" position="22.00,2.00" prototype="math.number">
+            <port name="value" type="float" value="252.0"/>
+        </node>
+        <node name="range1" position="4.00,-1.00" prototype="math.range"/>
+        <node name="rect1" position="12.00,10.00" prototype="corevector.rect">
+            <port name="width" type="float" value="256.0"/>
+            <port name="height" type="float" value="256.0"/>
+        </node>
+        <node name="subtract1" position="4.00,4.00" prototype="math.subtract"/>
+        <node name="subtract2" position="17.00,5.00" prototype="math.subtract"/>
+        <node name="text_on_path1" position="7.00,14.00" prototype="corevector.text_on_path">
+            <port name="text" type="string" value="10"/>
+            <port name="font_name" type="string" value="Berlin Sans FB"/>
+            <port name="font_size" type="float" value="200.0"/>
+        </node>
+        <conn input="compound1.shape1" output="arc1"/>
+        <conn input="compound1.shape2" output="arc2"/>
+        <conn input="multiply1.value1" output="range1"/>
+        <conn input="multiply1.value2" output="number1"/>
+        <conn input="arc2.width" output="inner_width"/>
+        <conn input="arc2.height" output="inner_width"/>
+        <conn input="arc1.degrees" output="angle"/>
+        <conn input="arc2.degrees" output="angle"/>
+        <conn input="divide1.value1" output="angle"/>
+        <conn input="divide1.value2" output="number2"/>
+        <conn input="subtract1.value1" output="multiply1"/>
+        <conn input="arc1.start_angle" output="subtract1"/>
+        <conn input="arc2.start_angle" output="subtract1"/>
+        <conn input="subtract1.value2" output="divide1"/>
+        <conn input="colorize1.shape" output="compound1"/>
+        <conn input="compound2.shape1" output="arc3"/>
+        <conn input="compound2.shape2" output="arc4"/>
+        <conn input="arc4.width" output="inner_width1"/>
+        <conn input="arc4.height" output="inner_width1"/>
+        <conn input="arc3.degrees" output="angle1"/>
+        <conn input="arc4.degrees" output="angle1"/>
+        <conn input="divide2.value1" output="angle1"/>
+        <conn input="arc3.start_angle" output="subtract2"/>
+        <conn input="arc4.start_angle" output="subtract2"/>
+        <conn input="subtract2.value2" output="divide2"/>
+        <conn input="colorize2.shape" output="compound2"/>
+        <conn input="combine1.list1" output="rect1"/>
+        <conn input="divide2.value2" output="number2"/>
+        <conn input="subtract2.value1" output="number3"/>
+        <conn input="combine1.list6" output="colorize1"/>
+        <conn input="combine1.list7" output="colorize2"/>
+        <conn input="colorize3.shape" output="text_on_path1"/>
+        <conn input="combine1.list5" output="colorize3"/>
+        <conn input="text_on_path1.path" output="line1"/>
+    </node>
+</ndbx>
