@@ -1,11 +1,13 @@
-﻿#Requires -Version 7
+#Requires -Version 7
 
 param (
     [switch]$Verbose,
     [switch]$Release,
+    [switch]$Publish,
     [switch]$NoBuild,
     [switch]$NoSymlink,
     [switch]$NoTail,
+    [switch]$NoDeploy,
     [switch]$DebugInBrowser
 )
 
@@ -20,13 +22,13 @@ $pluginName = 'StreamDeckSfactory'
 # detected config
 
 $buildConfig = $Release ? 'Release' : 'Debug'
-$buildDir = Join-Path $PSScriptRoot .. artifacts ($Release ? 'publish' : 'bin') $buildConfig
+$buildDir = Join-Path $PSScriptRoot .. artifacts ($Publish ? 'publish' : 'bin') $buildConfig
 
 # optionally build
 
 if (!$NoBuild) {
     Write-Host "Building $pluginName..."
-    dotnet ($Release ? 'publish' : 'build') (Resolve-Path (Join-Path $PSScriptRoot "$pluginName.csproj")) `
+    dotnet ($Publish ? 'publish' : 'build') (Resolve-Path (Join-Path $PSScriptRoot "$pluginName.csproj")) `
         -c $buildConfig --verbosity quiet -- /nologo /clp:NoSummary
     if ($LASTEXITCODE) {
         Write-Error "Build failed"
@@ -35,6 +37,12 @@ if (!$NoBuild) {
 
 if (!(Test-Path $buildDir)) {
     Write-Error "Build output dir ('$buildDir') not found; run a build"
+}
+
+# stop here if we're not going to deploy
+
+if ($NoDeploy) {
+    return
 }
 
 # find where we need to deploy to
