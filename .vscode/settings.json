@@ -1,0 +1,9 @@
+{
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#242424",
+        "activityBar.background": "#242053",
+        "titleBar.activeBackground": "#332C75",
+        "titleBar.activeForeground": "#FDFCFE"
+    },
+    "dotnet.defaultSolution": "src/StreamDeckSfactory.sln"
+}
