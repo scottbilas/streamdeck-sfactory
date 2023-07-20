@@ -4,6 +4,7 @@ param (
     [switch]$Verbose,
     [switch]$Release,
     [switch]$Publish,
+    [switch]$BuildWithDebuggerWait,
     [switch]$NoBuild,
     [switch]$NoSymlink,
     [switch]$NoTail,
@@ -29,7 +30,9 @@ $buildDir = Join-Path $PSScriptRoot .. artifacts ($Publish ? 'publish' : 'bin') 
 if (!$NoBuild) {
     Write-Host "Building $pluginName..."
     dotnet ($Publish ? 'publish' : 'build') (Resolve-Path (Join-Path $PSScriptRoot "$pluginName.csproj")) `
-        -c $buildConfig --verbosity quiet -- /nologo /clp:NoSummary
+        -c $buildConfig --verbosity quiet `
+        -p:WaitForDebugger=$BuildWithDebuggerWait `
+        -- /nologo /clp:NoSummary
     if ($LASTEXITCODE) {
         Write-Error "Build failed"
     }

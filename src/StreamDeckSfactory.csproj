@@ -6,7 +6,6 @@
         <!-- build -->
         <TargetFramework>net7.0</TargetFramework>
         <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-        <RuntimeIdentifiers Condition=" '$(Configuration)'=='Release' ">win-x64;osx-x64</RuntimeIdentifiers>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
         <OutputPath>$(ArtifactsPath)bin\$(Configuration)</OutputPath>
@@ -16,13 +15,17 @@
         <LangVersion>latest</LangVersion>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <Nullable>enable</Nullable>
-        <RootNamespace/>
+        <RootNamespace />
+
+        <!-- special startup debugging -->
+        <DefineConstants Condition=" '$(WaitForDebugger)' == 'true' ">$(DefineConstants);WAIT_FOR_DEBUGGER</DefineConstants>
     </PropertyGroup>
 
-    <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <PropertyGroup>
         <PublishSingleFile>true</PublishSingleFile>
         <PublishReadyToRun>true</PublishReadyToRun>
-        <SelfContained>true</SelfContained> <!-- true = 80MB, false = 5MB but risks breaking depending on .NET installation -->
+        <SelfContained>true</SelfContained> <!-- true = 80MB uncompressed, false = 5MB but risks breaking depending on .NET installation -->
+        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -30,16 +33,17 @@
             <NoWarn>NU1701</NoWarn>
         </PackageReference>
         <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
-        <PackageReference Include="StreamDeckLib" Version="0.5.2040" />
-        <PackageReference Include="StreamDeckLib.Config" Version="0.5.2040" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Serilog" Version="2.7.1" />
+        <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
+        <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+        <PackageReference Include="StreamDeckLib" Version="0.5.2040" />
         <PackageReference Include="System.Net.WebSockets" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup>
         <PluginFiles Include="en.json" />
         <PluginFiles Include="manifest.json" />
-        <PluginFiles Include="appsettings.json" />
         <PluginFiles Include="images\**\*" />
     </ItemGroup>
 
