@@ -22,17 +22,20 @@ partial class MacroAction : BaseStreamDeckAction
     {
         var settings = args.payload.settings;
         var macroName = (string)settings.Name;
+        var variantName = (string)settings.Variant;
 
         Log.Verbose("ApplySettings: " + Regex.Replace(settings.ToString(), @"\s+", " "));
 
         if (macroName == "HotBar")
         {
-            var hotBarNumber = int.Parse(settings.Variant);
+            var hotBarNumber = int.Parse(variantName);
             var sim = new InputSimulator();
 
             Log.Verbose($"{args.payload.coordinates.column},{args.payload.coordinates.row} = HotBar {hotBarNumber}");
 
             var imageName = $"images/hotbars/hotbar_{hotBarNumber}.png";
+
+            await Manager.SetTitleAsync(args.context, "");
             await Manager.SetImageAsync(args.context, imageName);
 
             _action = () =>
@@ -51,7 +54,6 @@ partial class MacroAction : BaseStreamDeckAction
             Log.Verbose($"{args.payload.coordinates.column},{args.payload.coordinates.row} = Buildable '{macroName}'");
 
             var imageName = "images/buildables/" + macroName.Replace(' ', '_');
-            var variantName = (string)settings.Variant;
             if (variantName != null)
                 imageName += $"_({variantName.Replace(' ', '_')})";
 
