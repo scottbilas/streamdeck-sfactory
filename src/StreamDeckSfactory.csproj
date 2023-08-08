@@ -45,24 +45,10 @@
         <PluginFiles Include="en.json" />
         <PluginFiles Include="manifest.json" />
         <PluginFiles Include="images\**\*" />
-    </ItemGroup>
-
-    <ItemGroup>
         <PluginFiles Include="inspector\**\*" />
-
-        <None Update="inspector\index.tt">
-            <Generator>TextTemplatingFileGenerator</Generator>
-            <LastGenOutput>index.html</LastGenOutput>
-        </None>
-        <Content Update="inspector\index.html">
-            <AutoGen>True</AutoGen>
-            <DesignTime>True</DesignTime>
-            <DependentUpon>index.tt</DependentUpon>
-        </Content>
     </ItemGroup>
 
     <ItemGroup>
-        <PluginFiles Remove="**\*.tt" />
         <PluginFiles Remove="**\.*" />
 
         <None Include="@(PluginFiles)">

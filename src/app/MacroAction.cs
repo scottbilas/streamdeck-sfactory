@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using StreamDeckLib;
@@ -21,25 +21,49 @@ partial class MacroAction : BaseStreamDeckAction
     async Task ApplySettings(StreamDeckEventPayload args)
     {
         var settings = args.payload.settings;
+        var macroName = (string)settings.Name;
 
-        Log.Verbose("Settings: " + Regex.Replace(settings.ToString(), @"\s+", " "));
+        Log.Verbose("ApplySettings: " + Regex.Replace(settings.ToString(), @"\s+", " "));
 
-        if (settings.BuildingMacro != null)
+        if (macroName == "HotBar")
         {
-            var buildingType = (string)settings.BuildingMacro.Type;
+            var hotBarNumber = int.Parse(settings.Variant);
             var sim = new InputSimulator();
 
-            Log.Verbose($"{args.payload.coordinates.column},{args.payload.coordinates.row} = BuildingMacro '{buildingType}'");
+            Log.Verbose($"{args.payload.coordinates.column},{args.payload.coordinates.row} = HotBar {hotBarNumber}");
 
-            var imageName = "images/buildings/" + buildingType.Replace(' ', '_') + ".png";
+            var imageName = $"images/hotbars/hotbar_{hotBarNumber}.png";
+            await Manager.SetImageAsync(args.context, imageName);
+
+            _action = () =>
+            {
+                sim.Keyboard.KeyPress(VirtualKeyCode.MENU);
+                sim.Keyboard.Sleep(50);
+                sim.Keyboard.KeyPress(VirtualKeyCode.VK_0 + hotBarNumber);
+
+                return Task.CompletedTask;
+            };
+        }
+        else if (macroName != null)
+        {
+            var sim = new InputSimulator();
+
+            Log.Verbose($"{args.payload.coordinates.column},{args.payload.coordinates.row} = Buildable '{macroName}'");
+
+            var imageName = "images/buildables/" + macroName.Replace(' ', '_');
+            var variantName = (string)settings.Variant;
+            if (variantName != null)
+                imageName += $"_({variantName.Replace(' ', '_')})";
+
+            imageName += ".png";
             if (!File.Exists(imageName))
             {
-                var testName = imageName[..^4] + "_(FICSIT).png";
-                imageName = File.Exists(testName) ? testName : "images/category/categoryIcon@2x.png";
+                Log.Verbose($"Image does not exist: {imageName}");
+                imageName = File.Exists(imageName) ? imageName : "images/category/categoryIcon@2x.png";
             }
 
             var title = "";
-            var match = TitleDecorationRx().Match(buildingType);
+            var match = TitleDecorationRx().Match(macroName);
             if (match.Success)
                 title = match.Groups[1].Value;
 
@@ -50,31 +74,12 @@ partial class MacroAction : BaseStreamDeckAction
             {
                 sim.Keyboard.KeyDown(VirtualKeyCode.VK_N); // default hotkey for search bar (TODO: make a global setting)
                 sim.Keyboard.Sleep(50);
-                sim.Keyboard.TextEntry(buildingType);
+                sim.Keyboard.TextEntry(macroName);
                 sim.Keyboard.Sleep(50);
 
                 sim.Keyboard.KeyDown(VirtualKeyCode.RETURN);
                 sim.Keyboard.Sleep(50);
                 sim.Keyboard.KeyUp(VirtualKeyCode.RETURN);
-
-                return Task.CompletedTask;
-            };
-        }
-        else if (settings.HotBarMacro != null)
-        {
-            var hotBarNumber = (int)settings.HotBarMacro.Number;
-            var sim = new InputSimulator();
-
-            Log.Verbose($"{args.payload.coordinates.column},{args.payload.coordinates.row} = HotBarMacro {hotBarNumber}");
-
-            var imageName = $"images/hotbars/hotbar_{hotBarNumber}.png";
-            await Manager.SetImageAsync(args.context, imageName);
-
-            _action = () =>
-            {
-                sim.Keyboard.KeyPress(VirtualKeyCode.MENU);
-                sim.Keyboard.Sleep(50);
-                sim.Keyboard.KeyPress(VirtualKeyCode.VK_0 + hotBarNumber);
 
                 return Task.CompletedTask;
             };

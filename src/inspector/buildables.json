@@ -1,0 +1,610 @@
+{
+  "Logistics": {
+    "Conveyor Belt Mk.1": [],
+    "Conveyor Belt Mk.2": [],
+    "Conveyor Belt Mk.3": [],
+    "Conveyor Belt Mk.4": [],
+    "Conveyor Belt Mk.5": [],
+    "Conveyor Ceiling Mount": [],
+    "Conveyor Lift Floor Hole": [],
+    "Conveyor Lift Mk.1": [],
+    "Conveyor Lift Mk.2": [],
+    "Conveyor Lift Mk.3": [],
+    "Conveyor Lift Mk.4": [],
+    "Conveyor Lift Mk.5": [],
+    "Conveyor Merger": [],
+    "Conveyor Pole": [],
+    "Conveyor Splitter": [],
+    "Drone": [],
+    "Drone Port": [],
+    "Pipeline Floor Hole": [],
+    "Pipeline Junction Cross": [],
+    "Pipeline Mk.1": [
+      "",
+      "No Indicator"
+    ],
+    "Pipeline Mk.2": [
+      "",
+      "No Indicator"
+    ],
+    "Pipeline Pump Mk.1": [],
+    "Pipeline Pump Mk.2": [],
+    "Pipeline Support": [],
+    "Programmable Splitter": [],
+    "Smart Splitter": [],
+    "Stackable Conveyor Pole": [],
+    "Stackable Pipeline Support": [],
+    "Valve": []
+  },
+  "Power": {
+    "Coal Generator": [],
+    "Double Wall Outlet Mk.1": [],
+    "Double Wall Outlet Mk.2": [],
+    "Double Wall Outlet Mk.3": [],
+    "Fuel Generator": [],
+    "Geothermal Generator": [],
+    "Nuclear Power Plant": [],
+    "Power Line": [],
+    "Power Pole Mk.1": [],
+    "Power Pole Mk.2": [],
+    "Power Pole Mk.3": [],
+    "Power Storage": [],
+    "Power Switch": [],
+    "Wall Outlet Mk.1": [],
+    "Wall Outlet Mk.2": [],
+    "Wall Outlet Mk.3": []
+  },
+  "Blocks": {
+    "Double Ramp 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Double Ramp 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Double Ramp 8m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Down Corner Ramp 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Down Corner Ramp 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Down Corner Ramp 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Foundation 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Foundation 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Foundation 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Half Foundation 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Half Foundation 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Half Foundation 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inner Corner Extension 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inner Corner Extension 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inner Corner Extension 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inner Corner Quarter Pipe": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Down Corner 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Down Corner 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Down Corner 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Ramp 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Ramp 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Ramp 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Up Corner 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Up Corner 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inv. Up Corner 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inverted Inner Corner Quarter Pipe": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inverted Outer Corner Quarter Pipe": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Inverted Quarter Pipe": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Outer Corner Extension 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Outer Corner Extension 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Outer Corner Extension 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Outer Corner Quarter Pipe": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Quarter Pipe": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Ramp 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Ramp 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Ramp 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Up Corner Ramp 1m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Up Corner Ramp 2m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ],
+    "Up Corner Ramp 4m": [
+      "Asphalt",
+      "Coated",
+      "Concrete",
+      "FICSIT",
+      "Grip Metal"
+    ]
+  },
+  "Structure": {
+    "Beam Connector": [],
+    "Beam Connector Double": [],
+    "Beam Support": [],
+    "Big Concrete Pillar": [],
+    "Big Frame Pillar": [],
+    "Big Metal Pillar": [],
+    "Big Pillar Support": [],
+    "Metal Beam": [],
+    "Painted Beam": [],
+    "Small Concrete Pillar": [],
+    "Small Frame Pillar": [],
+    "Small Metal Pillar": [],
+    "Small Pillar Support": []
+  },
+  "Walkways": {
+    "Catwalk Corner": [],
+    "Catwalk Crossing": [],
+    "Catwalk Ramp": [],
+    "Catwalk Stairs": [],
+    "Catwalk Straight": [],
+    "Catwalk T-Crossing": [],
+    "Empty Platform": [],
+    "Empty Platform With Catwalk": [],
+    "Fluid Freight Platform": [],
+    "Freight Platform": [],
+    "Industrial Railing": [],
+    "Ladder": [],
+    "Lookout Tower": [],
+    "Modern Railing": [],
+    "Stairs Left": [],
+    "Stairs Right": [],
+    "Walkway Crossing": [],
+    "Walkway Ramp": [],
+    "Walkway Straight": [],
+    "Walkway T-Crossing": [],
+    "Walkway Turn": []
+  },
+  "Walls": {
+    "Automated Gate": [],
+    "Basic Wall 1m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Basic Wall 4m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Center Door Wall": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Conveyor Wall Mount": [],
+    "Conveyor Wall x1": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Conveyor Wall x2": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Conveyor Wall x3": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Frame Window": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Full Frame Window": [],
+    "Gate Hole Wall": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Hex Frame Window": [],
+    "Inv. Ramp Wall 1m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Inv. Ramp Wall 2m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Inv. Ramp Wall 4m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Inv. Ramp Wall 8m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Panel Window": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Pipeline Wall Hole": [],
+    "Pipeline Wall Support": [],
+    "Ramp Wall 1m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Ramp Wall 2m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Ramp Wall 4m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Ramp Wall 8m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Reinforced Window": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Side Door Wall": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Single Window": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Tilted Concave Wall 4m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Tilted Concave Wall 8m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Tilted Corner Wall 4m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Tilted Corner Wall 8m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Tilted Wall 4m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Tilted Wall 8m": [
+      "Concrete",
+      "FICSIT",
+      "Steel"
+    ],
+    "Wall Mounted Flood Light": []
+  },
+  "Roofs": {
+    "FICSIT Roof 1m": [],
+    "FICSIT Roof 2m": [],
+    "FICSIT Roof 4m": [],
+    "FICSIT Roof Flat": [],
+    "Glass Roof 1m": [],
+    "Glass Roof 2m": [],
+    "Glass Roof 4m": [],
+    "Glass Roof Flat": [],
+    "Metal Roof 1m": [],
+    "Metal Roof 2m": [],
+    "Metal Roof 4m": [],
+    "Metal Roof Flat": [],
+    "Tar Roof 1m": [],
+    "Tar Roof 2m": [],
+    "Tar Roof 4m": [],
+    "Tar Roof Flat": []
+  },
+  "Decorations": {
+    "Ceiling Light": [],
+    "Flood Light Tower": [],
+    "Label Sign 2m": [],
+    "Label Sign 3m": [],
+    "Label Sign 4m": [],
+    "Large Billboard": [],
+    "Lights Control Panel": [],
+    "Road Barrier": [],
+    "Small Billboard": [],
+    "Square Sign 0.5m": [],
+    "Square Sign 1m": [],
+    "Square Sign 2m": [],
+    "Street Light": []
+  },
+  "Transport": {
+    "Block Signal": [],
+    "Cyber Wagon": [],
+    "Electric Locomotive": [],
+    "Explorer": [],
+    "Freight Car": [],
+    "Hypertube": [],
+    "Hypertube Entrance": [],
+    "Hypertube Floor Hole": [],
+    "Hypertube Support": [],
+    "Hypertube Wall Hole": [],
+    "Hypertube Wall Support": [],
+    "Jump Pad": [],
+    "Path Signal": [],
+    "Railway": [],
+    "Stackable Hypertube Support": [],
+    "Tractor": [],
+    "Train Station": [],
+    "Truck": [],
+    "Truck Station": [],
+    "U-Jelly Landing Pad": []
+  },
+  "Special": {
+    "AWESOME Shop": [],
+    "AWESOME Sink": [],
+    "MAM": [],
+    "Space Elevator": [],
+    "The HUB": []
+  },
+  "Other": {
+    "Assembler": [],
+    "Biomass Burner": [],
+    "Blender": [],
+    "Blueprint Designer": [],
+    "Constructor": [],
+    "Craft Bench": [],
+    "Equipment Workshop": [],
+    "Fluid Buffer": [],
+    "Foundry": [],
+    "Hazard Storage Box": [],
+    "Industrial Fluid Buffer": [],
+    "Industrial Storage Container": [],
+    "Manufacturer": [],
+    "Medical Storage Box": [],
+    "Miner Mk.1": [],
+    "Miner Mk.2": [],
+    "Miner Mk.3": [],
+    "Oil Extractor": [],
+    "Packager": [],
+    "Particle Accelerator": [],
+    "Personal Storage Box": [],
+    "Radar Tower": [],
+    "Refinery": [],
+    "Resource Well Extractor": [],
+    "Resource Well Pressurizer": [],
+    "Smelter": [],
+    "Storage Container": [],
+    "Water Extractor": []
+  },
+  "FICSMAS": {
+    "Candy Cane Building": [],
+    "FICSMAS Gift Tree": [],
+    "FICSMAS Power Light": [],
+    "FICSMAS Snow Dispenser": [],
+    "FICSMAS Wreath": [],
+    "Giant FICSMAS Tree": [],
+    "Snowman": []
+  }
+}

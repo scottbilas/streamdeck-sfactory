@@ -1,43 +1,96 @@
 ﻿/// <reference path="libs/js/property-inspector.js" />
+/// <reference path="utils.js" />
 
-function throttle(delay, func) {
-  let lastExecutionTime = 0, timerId
+let _config, _jsn, _initialized
 
-  return function (...args) {
-    function apply() {
-      lastExecutionTime = Date.now()
-      func.apply(this, args)
-    }
+function init() {
+  if (!_config || !_jsn || _initialized) return
+  _initialized = true
 
-    clearTimeout(timerId)
-    if (Date.now() - lastExecutionTime < delay)
-      timerId = setTimeout(apply, delay) // ensure that the last change is always committed
-    else
-      apply() // throttle period passed, so commit (this gives us the live updates that debounce does not)
-  }
-}
+  // extract setup data
 
-$PI.onConnected((jsn) => {
-  const {actionInfo, appInfo, connection, messageType, port, uuid} = jsn
+  const {actionInfo, appInfo, connection, messageType, port, uuid} = _jsn
   const {payload, context} = actionInfo
-  const {settings} = payload
+  let {settings} = payload
 
-  const macro = document.querySelector('#property-macro')
-  macro.onchange = throttle(150, () => {
-    let selected = macro.options[macro.selectedIndex]
-    let selectedType = selected.getAttribute('macroType')
+  // find DOM elements
 
-    if (selectedType === 'hotbar') {
-      $PI.setSettings({HotBarMacro: {Number: parseInt(macro.value, 10)}})
-    } else {
-      $PI.setSettings({BuildingMacro: {Type: macro.value}})
+  const macroElement = document.querySelector('#property-macro')
+  const variantElement = document.querySelector('#property-variant')
+  const variantDiv = document.querySelector('#div-variant')
+
+  // configure change handlers
+
+  const applySettings = function() {
+
+    if (!settings) return
+
+    // pick default if missing/invalid macro
+    let variants = _config[settings.Name]
+    if (!variants) {
+      let name
+      [name, variants] = Object.entries(_config)[0]
+      settings = {Name: name}
     }
+    macroElement.value = settings.Name
+
+    // pick default if missing/invalid variant
+    variantElement.innerHTML = ''
+    if (variants.length) {
+      if (!variants.includes(settings.Variant)) {
+        settings.Variant = variants[0]
+      }
+
+      // TODO: fill this via a fragment
+      // TODO: use fragment compare to skip reassigning
+      _config[macroElement.value].forEach(v => addOption(variantElement, v))
+      variantElement.value = settings.Variant
+
+      variantDiv.style.visibility = 'visible'
+    }
+    else {
+      delete settings.Variant
+      variantDiv.style.visibility = 'collapse'
+    }
+
+    // store settings in prefs, which will also update the app
+    $PI.setSettings(settings)
+  }
+
+  const onchange = throttle(150, () => {
+    settings = {Name: macroElement.value, Variant: variantElement.value}
+    applySettings()
   })
 
-  if (settings.BuildingMacro) {
-    macro.value = settings.BuildingMacro.Type
-  }
-  else if (settings.HotBarMacro) {
-    macro.value = settings.HotBarMacro.Number
-  }
+  macroElement.onchange = onchange;
+  variantElement.onchange = onchange;
+
+  // TODO: fill this via a fragment
+  Object.entries(_config).forEach(([groupName, group]) => {
+    let optgroup = addOptGroup(macroElement, groupName)
+    Object.entries(group).forEach(([buildableName, buildable]) => {
+      addOption(optgroup, buildableName)
+      _config[buildableName] = buildable.map(v => v.length ? v : "Normal")
+    })
+    delete _config[groupName]
+  })
+
+  // copy stored settings to DOM
+
+  applySettings()
+}
+
+// init will happen after both a) buildables.json is parsed and b) we're connected to $PI
+
+$PI.onConnected((jsn) => {
+  _jsn = jsn
+  init()
 })
+
+fetch('buildables.json')
+    .then(response => response.json())
+    .then(buildables => {
+      _config = buildables
+      _config['Special']['HotBar'] = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10' ]
+      init()
+    })
