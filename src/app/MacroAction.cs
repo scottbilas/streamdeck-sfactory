@@ -61,7 +61,7 @@ partial class MacroAction : BaseStreamDeckAction
             if (!File.Exists(imageName))
             {
                 Log.Verbose($"Image does not exist: {imageName}");
-                imageName = File.Exists(imageName) ? imageName : "images/category/categoryIcon@2x.png";
+                imageName = File.Exists(imageName) ? imageName : "images/plugin/plugin.png";
             }
 
             var title = "";

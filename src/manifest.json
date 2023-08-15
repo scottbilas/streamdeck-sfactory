@@ -1,11 +1,11 @@
 {
   "Actions": [
     {
-      "Icon": "images/category/categoryIcon@2x",
+      "Icon": "images/plugin/plugin",
       "Name": "Macro",
       "States": [
         {
-          "Image": "images/category/categoryIcon@2x"
+          "Image": "images/plugin/plugin"
         }
       ],
       "SupportedInMultiActions": false,
@@ -14,14 +14,14 @@
     }
   ],
   "Category": "Satisfactory",
-  "CategoryIcon": "images/category/categoryIcon@2x",
+  "CategoryIcon": "images/plugin/plugin",
   "Disabled": false,
   "Author": "Scott Bilas",
   "CodePath": "StreamDeckSfactory.exe",
   "PropertyInspectorPath": "inspector/index.html",
   "Description": "StreamDeck commands for Satisfactory, a game by Coffee Stain Studios.",
   "Name": "StreamDeckSfactory",
-  "Icon": "images/category/categoryIcon@2x",
+  "Icon": "images/plugin/plugin",
   "URL": "https://www.elgato.com/gaming/stream-deck",
   "Version": "1.0",
   "SDKVersion": 2,
