@@ -11,9 +11,29 @@
             <div class="sdpi-item-label">Macro</div>
             <select class="sdpi-item-value" id="property-macro"></select>
         </div>
-        <div class="sdpi-item" type="select" id="div-variant" style="visibility:collapse">
-            <div class="sdpi-item-label">Variant</div>
-            <select class="sdpi-item-value" id="property-variant"></select>
+        <div id="div-variant" style="visibility:collapse">
+            <div class="sdpi-heading">Variant</div>
+            <div class="sdpi-item" type="select">
+                <div class="sdpi-item-label">Variant</div>
+                <select class="sdpi-item-value" id="property-variant"></select>
+            </div>
+
+
+            <div class="sdpi-item" type="checkbox">
+                <div class="sdpi-item-label">Offset</div>
+                <div class="sdpi-item-group file min80">
+                    <div class="sdpi-item-child">
+                        <input id="property-offset-enabled" type="checkbox" value="on">
+                        <label for="property-offset-enabled" class="sdpi-item-label"><span></span>enabled</label>
+                    </div>
+                    <div class="sdpi-item-child">
+                        <label>Count</label>
+                        <input id="property-offset" type="number">
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 

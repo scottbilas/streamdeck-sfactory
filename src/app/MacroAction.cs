@@ -18,11 +18,17 @@ partial class MacroAction : BaseStreamDeckAction
     public override Task OnDidReceiveSettings(StreamDeckEventPayload args) => ApplySettings(args);
     public override Task OnWillAppear(StreamDeckEventPayload args) => ApplySettings(args);
 
+    public override Task OnDidReceiveGlobalSettings(StreamDeckEventPayload args)
+    {
+        return base.OnDidReceiveGlobalSettings(args);
+    }
+
     async Task ApplySettings(StreamDeckEventPayload args)
     {
         var settings = args.payload.settings;
         var macroName = (string)settings.Name;
         var variantName = (string)settings.Variant;
+        var allVariants = (string[])settings.AllVariants;
 
         Log.Verbose("ApplySettings: " + Regex.Replace(settings.ToString(), @"\s+", " "));
 
@@ -54,7 +60,7 @@ partial class MacroAction : BaseStreamDeckAction
             Log.Verbose($"{args.payload.coordinates.column},{args.payload.coordinates.row} = Buildable '{macroName}'");
 
             var imageName = "images/buildables/" + macroName.Replace(' ', '_');
-            if (variantName != null)
+            if (!string.IsNullOrEmpty(variantName))
                 imageName += $"_({variantName.Replace(' ', '_')})";
 
             imageName += ".png";

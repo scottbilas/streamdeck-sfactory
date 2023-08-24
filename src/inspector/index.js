@@ -12,12 +12,15 @@ function init() {
   const {actionInfo, appInfo, connection, messageType, port, uuid} = _jsn
   const {payload, context} = actionInfo
   let {settings} = payload
+  let lastSettings = {}
 
   // find DOM elements
 
   const macroElement = document.querySelector('#property-macro')
-  const variantElement = document.querySelector('#property-variant')
   const variantDiv = document.querySelector('#div-variant')
+  const variantElement = document.querySelector('#property-variant')
+  //const macroSkipElement = document.querySelector('#property-macro-skip')
+  //const macroSkipValueElement = document.querySelector('#property-macro-skip-value')
 
   // configure change handlers
 
@@ -43,8 +46,18 @@ function init() {
 
       // TODO: fill this via a fragment
       // TODO: use fragment compare to skip reassigning
-      _config[macroElement.value].forEach(v => addOption(variantElement, v))
+      _config[macroElement.value].forEach(v => addOption(variantElement, v || 'Normal', v))
       variantElement.value = settings.Variant
+
+      //macroSkipElement.min = 0
+      //macroSkipElement.max = variants.length - 1
+
+      // if macro or variant changed, reset skip
+      /*if (lastSettings.Name !== settings.Name || lastSettings.Variant !== settings.Variant) {
+        macroSkipElement.value = variantElement.selectedIndex
+      }
+
+      macroSkipValueElement.textContent = macroSkipElement.value*/
 
       variantDiv.style.visibility = 'visible'
     }
@@ -55,6 +68,7 @@ function init() {
 
     // store settings in prefs, which will also update the app
     $PI.setSettings(settings)
+    lastSettings = settings
   }
 
   const onchange = throttle(150, () => {
@@ -62,15 +76,27 @@ function init() {
     applySettings()
   })
 
-  macroElement.onchange = onchange;
-  variantElement.onchange = onchange;
+  macroElement.onchange = onchange
+  variantElement.onchange = onchange
+  //macroSkipElement.oninput = onchange
+
+/*  macroSkipElement.oninput = throttle(150, () => {
+    settings.MacroSkip = macroSkipElement.value
+    macroSkipValueElement.textContent = macroSkipElement.value
+    $PI.setSettings(settings)
+  })*/
+
+  // fill macro dropdown and discover all variant types
+
+  let allVariants = {}
 
   // TODO: fill this via a fragment
   Object.entries(_config).forEach(([groupName, group]) => {
     let optgroup = addOptGroup(macroElement, groupName)
     Object.entries(group).forEach(([buildableName, buildable]) => {
-      addOption(optgroup, buildableName)
-      _config[buildableName] = buildable.map(v => v.length ? v : "Normal")
+      addOption(optgroup, buildableName, buildableName)
+      _config[buildableName] = buildable
+      buildable.forEach(v => allVariants[v] = true)
     })
     delete _config[groupName]
   })

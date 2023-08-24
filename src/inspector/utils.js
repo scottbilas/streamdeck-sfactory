@@ -23,10 +23,10 @@ function addOptGroup(parent, name) {
     return optgroup
 }
 
-function addOption(parent, name) {
+function addOption(parent, name, value) {
     let option = document.createElement('option')
     option.textContent = name
-    option.value = name
+    option.value = value
     parent.appendChild(option)
 
     return option
